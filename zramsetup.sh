@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# if not in modprobe > sudo apt install -y linux-image-generic
+
 if [ $EUID != 0 ]
 then
     echo "ERROR: You have to be root to execute this script"
