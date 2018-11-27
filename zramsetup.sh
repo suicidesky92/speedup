@@ -15,7 +15,12 @@ echo "CPUs= $CPUNUMBERS, RAM= $MEMTOTAL MB"
 read -p "I think, need $CPUNUMBERS block devices in RAM, $SIZEDEV MB each. Ok?"
 let "SIZEDEV=SIZEDEV*1024*1024"
 
-echo"modprobe zram num_devices=$CPUNUMBERS"
+
+SWAPOFFI=$(swapon -s | grep dev | awk '{print$1}')
+
+swapoff $SWAPOFFI
+
+modprobe zram num_devices=$CPUNUMBERS
 modprobe lz4
 
 BLK=0
